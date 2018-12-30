@@ -1,0 +1,165 @@
+\documentclass[10pt,aspectratio=169,dvipsnames]{beamer}
+\usetheme[sectionslides]{Karlsruhe}
+
+% PACKAGES
+\usepackage[absolute,overlay]{textpos}
+\usepackage{booktabs}
+\usepackage[utf8]{inputenc}
+\usepackage{parskip}
+\usepackage[official]{eurosym}
+
+% HYPERREFERENCES
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	citecolor=kit-blue100,
+	linkcolor=kit-blue100,
+	urlcolor=kit-blue100
+}
+
+% GRAPHICS	
+\graphicspath{{graphics/}}
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png,.jpg}
+
+% FORMATTING
+\setlength{\parskip}{6pt}
+\linespread{1.1}
+\newcommand{\seprule}{\par\noindent\textcolor{black!25}{\rule{\textwidth}{0.4pt}}}
+
+% SOURCES
+\setbeamercolor{framesource}{fg=gray}
+\setbeamerfont{framesource}{size=\tiny}
+\newcommand{\source}[1]{\begin{textblock*}{5cm}(10.5cm,8.35cm)
+    \begin{beamercolorbox}[ht=0.5cm,right]{framesource}
+        \usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Source: {#1}
+    \end{beamercolorbox}
+\end{textblock*}}
+
+% COLOR TEXT
+\newcommand{\bl}[1]{\textcolor{kit-blue100}{#1}}
+\newcommand{\gr}[1]{\textcolor{kit-green100}{#1}}
+\newcommand{\rd}[1]{\textcolor{kit-red100}{#1}}
+\newcommand{\yl}[1]{\textcolor{kit-yellow100}{#1}}
+\newcommand{\org}[1]{\textcolor{kit-orange100}{#1}}
+
+% FONT
+%\usepackage{utopia}
+
+% REFERENCES
+%\usepackage[backend=biber,style=authoryear-comp]{biblatex}
+%\bibliography{references.bib}
+
+% TITLE PAGE
+\title{Title of the Presentation}
+
+\author{\bf Max Mustermann}
+
+\institute[The University of Tatooine] % (optional, but mostly needed)
+{
+  \normalsize
+  \href{mailto:max.mustermann@tatooine.edu}{max.mustermann@tatooine.edu}\\
+  The University of Tatooine\\
+  Institute for Themes and Templates
+}
+
+\date{\today}
+
+\subject{Modelling the European Energy System}
+
+\titlegraphic{%
+	\vspace{-1cm}
+	\hspace{-1cm}
+	\includegraphics[trim=4cm 2cm 2cm 2cm,height=1.3cm,clip=true]{graphics/helmholtz.eps}
+	\hspace{4cm}
+	\includegraphics[trim=0 0cm 0 0cm,height=1.3cm,clip=true]{graphics/kitlogo.eps}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+  \frametitle{Outline}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+
+\section{Bullet Point Section}
+
+\begin{frame}{Enumerations}
+
+\begin{enumerate}
+
+\item Bullet point 1
+\begin{itemize}
+\item Bullet point 1
+\item Bullet point 2
+\item Bullet point 3
+\end{itemize}
+\item Bullet point 2
+\begin{itemize}
+\item Bullet point 1
+\item Bullet point 2
+\item Bullet point 3
+\end{itemize}
+\item Bullet point 3
+
+\end{enumerate}
+
+\source{\href{https://scholar.google.de/}{Google Scholar}}
+
+\end{frame}
+
+\section{Block Section}
+\begin{frame}{Blocks}
+
+\begin{block}{Regular Block}
+\begin{itemize}
+\item Bullet point 1
+\item Bullet point 2
+\end{itemize}
+~\\
+\end{block}
+
+\begin{exampleblock}{Example Block}
+\begin{itemize}
+\item Bullet point 1
+\item Bullet point 2
+\end{itemize}
+~\\
+\end{exampleblock}
+
+\begin{alertblock}{Alert Block}
+\begin{itemize}
+\item Bullet point 1
+\item Bullet point 2
+\end{itemize}
+~\\
+
+\end{alertblock}
+
+\end{frame}
+
+\section{Formula Section}
+
+\begin{frame}{Mathematical Slides}
+
+
+We have an \alert{objective function} $f: \mathbb{R}^k \to \mathbb{R}$
+\begin{equation*}
+  \max_{x} f(x)
+\end{equation*}
+[$x = (x_1, \dots x_k)$] subject to some \alert{constraints} within $\mathbb{R}^k$:
+\begin{align*}
+  g_i(x) & = c_i \hspace{1cm}\leftrightarrow\hspace{1cm} \lambda_i \hspace{1cm} i = 1,\dots n \\
+  h_j(x) & \leq d_j \hspace{1cm}\leftrightarrow\hspace{1cm} \mu_j \hspace{1cm} j = 1,\dots m
+\end{align*}
+
+$\lambda_i$ and $\mu_j$ are the \alert{KKT multipliers} (basically Lagrange multipliers) we introduce for
+each constraint equation; it measures the change in the objective value of the optimal solution obtained by relaxing the constraint (shadow price).
+
+\end{frame}
+
+
+\end{document}

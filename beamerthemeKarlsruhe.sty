@@ -1,0 +1,181 @@
+%% LaTeX-Beamer template for a modern twist on KIT design
+%% by Fabian Neumann
+%%
+%% colours compatible to KIT corporate design v2.0
+%% http://intranet.kit.edu/gestaltungsrichtlinien.php
+%%
+%% inspired by https://github.com/pazz/beamerthemeEdinburgh
+%%
+
+\ProvidesPackage{beamerthemeKarlsruhe}
+
+\newif\ifbeamer@theme@subsection
+\beamer@theme@subsectiontrue
+
+\DeclareOptionBeamer{footline}{\csname beamer@theme@footline@#1\endcsname}
+\DeclareOptionBeamer{subsection}[true]{\csname beamer@theme@subsection#1\endcsname}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+\useinnertheme[]{rectangles}
+\usecolortheme{Karlsruhe}
+\setbeamerfont{alerted text}{series=\bfseries}
+
+\setbeamertemplate{navigation symbols}{} 
+
+%%%%%%%%%%%%%%%%%%%%
+%% SECTION SLIDES %%
+%%%%%%%%%%%%%%%%%%%%
+
+\newif\if@SectionSlides
+\@SectionSlidesfalse
+\DeclareOption{sectionslides}{\@SectionSlidestrue}
+\ProcessOptions
+
+\if@SectionSlides
+\AtBeginSection[]{
+	\begin{frame}
+	\vfill
+	\centering
+	\begin{beamercolorbox}[
+		ht=10ex,
+		sep=1em,
+		wd={\paperwidth},
+	 	center
+	 	]{section}
+		\Large\usebeamerfont{title}\insertsectionhead\par%
+	\end{beamercolorbox}
+	\vfill
+\end{frame}
+}
+\fi
+
+% auxiliary definition for gradient
+\pgfdeclarehorizontalshading[frametitle right.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
+  color(0pt)=(frametitle right.bg);
+  color(\paperwidth)=(frametitle right.bg)}
+
+%%%%%%%%%%%%%%%
+%% HEADLINES %%
+%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{headline}{miniframes theme}
+{%
+  \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}{section in head/foot}
+    \vskip3pt\insertsectionnavigationhorizontal{\paperwidth}{}{}\vskip5pt
+  \end{beamercolorbox}%
+    \begin{beamercolorbox}[colsep=1.5pt]{middle separation line head}
+    \end{beamercolorbox}
+  \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%
+%% FRAME TITLES %%
+%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{frametitle}{KIT modern theme}
+{%
+  \nointerlineskip%
+  \vskip-2pt%
+  \hbox{\leavevmode
+    \advance\beamer@leftmargin by -12bp%
+    \advance\beamer@rightmargin by -12bp%
+    \beamer@tempdim=\textwidth%
+    \advance\beamer@tempdim by \beamer@leftmargin%
+    \advance\beamer@tempdim by \beamer@rightmargin%
+    \hskip-\Gm@lmargin\hbox{%
+      \setbox\beamer@tempbox=\hbox{
+        \begin{minipage}[b]{\paperwidth}%
+          \vbox{}\vskip-.25ex%
+          \leftskip0.3cm%
+          \rightskip0.3cm plus1fil\leavevmode
+          \insertframetitle%
+          \ifx\insertframesubtitle\@empty%
+            \strut\par%
+          \else
+            \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+          \fi%
+          \nointerlineskip
+          \vbox{}%
+        \end{minipage}}%
+      \beamer@tempdim=\ht\beamer@tempbox%
+      \begin{pgfpicture}{0pt}{0pt}{\paperwidth}{\beamer@tempdim}
+        \usebeamercolor{frametitle right}
+        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
+        \pgfusepath{clip}
+        \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}}
+      \end{pgfpicture}
+      \hskip-\paperwidth%
+      \box\beamer@tempbox%
+    }%
+      \hskip-\paperwidth%
+  }%
+}
+
+%%%%%%%%%%%%
+%% BLOCKS %%
+%%%%%%%%%%%%
+
+\def\blockcolsep{.5ex}
+
+%% NORMAL
+\defbeamertemplate*{block begin}{Karlsruhe}{
+  \par\vskip\medskipamount%
+  \ifx\insertblocktitle\@empty
+  \else
+  \begin{beamercolorbox}[colsep*=\blockcolsep]{block title}
+    {\rule[-0.4ex]{0mm}{2ex}\insertblocktitle}%
+  \end{beamercolorbox}%
+  \fi
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title}
+  {}
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[colsep*=\blockcolsep,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+\defbeamertemplate*{block end}{Karlsruhe}{\end{beamercolorbox}\vskip\smallskipamount}
+
+%% EXAMPLE BLOCKS
+\defbeamertemplate*{block example begin}{Karlsruhe}{
+  \par\vskip\medskipamount%
+  \ifx\insertblocktitle\@empty
+  \else
+  \begin{beamercolorbox}[colsep*=\blockcolsep]{block title example}
+    {\rule[-0.4ex]{0mm}{2ex}\insertblocktitle}%
+  \end{beamercolorbox}%
+  \fi
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title example}
+  {}
+  {\ifbeamercolorempty[bg]{block body example}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body example}%
+  \begin{beamercolorbox}[colsep*=\blockcolsep,vmode]{block body example}%
+    \ifbeamercolorempty[bg]{block body example}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+\defbeamertemplate*{block example end}{Karlsruhe}{\end{beamercolorbox}\vskip\smallskipamount}
+
+%% ALERTED BLOCKS
+\defbeamertemplate*{block alerted begin}{Karlsruhe}{
+  \par\vskip\medskipamount%
+  \ifx\insertblocktitle\@empty
+  \else
+  \begin{beamercolorbox}[colsep*=\blockcolsep]{block title alerted}
+    {\rule[-0.4ex]{0mm}{2ex}\insertblocktitle}%
+  \end{beamercolorbox}%
+  \fi
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title alerted}
+  {}
+  {\ifbeamercolorempty[bg]{block body alerted}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body alerted}%
+  \begin{beamercolorbox}[colsep*=\blockcolsep,vmode]{block body alerted}%
+    \ifbeamercolorempty[bg]{block body alerted}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+\defbeamertemplate*{block alerted end}{Karlsruhe}{\end{beamercolorbox}\vskip\smallskipamount}
+
+\mode<all>
