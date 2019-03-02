@@ -6,6 +6,8 @@ Using colours compatible to [KIT corporate design][corporate] it offers a modern
 
 If you know how to improve things, don't hesitate to fork away! Thanks for [inspiration][inspiration]!
 
+Note that using the KIT/Helmholtz logo requires you to be employee or student of KIT.
+
 ## Usage
 
 To use it just place the `.sty` files where LaTeX can find them (e.g. your project folder) and include `\usetheme{Karlsruhe}` in the preamble of your `.tex` file. For a title slide at the start of each section use `\usetheme[sectionslides]{Karlsruhe}`.
