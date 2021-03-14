@@ -2,6 +2,8 @@
 
 This is an *inofficial* LaTeX beamer theme for presentations of the Karlsruhe Institute of Technology (KIT).
 
+Note that using the KIT/Helmholtz logo requires you to be employee or student of KIT.
+
 ## Usage
 
 To use it just place the `.sty` files where LaTeX can find them (e.g. your project folder) and include `\usetheme{Karlsruhe}` in the preamble of your `.tex` file. For a title slide at the start of each section use `\usetheme[sectionslides]{Karlsruhe}`.
