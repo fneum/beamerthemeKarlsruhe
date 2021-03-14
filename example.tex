@@ -1,12 +1,38 @@
 \documentclass[10pt,aspectratio=169,dvipsnames]{beamer}
-\usetheme[sectionslides]{Karlsruhe}
+\usetheme[]{Karlsruhe}
+
+\setbeamertemplate{footline}{
+  \usebeamercolor[fg]{framesource}%
+  \usebeamerfont{page number in head}%
+  \hspace{0.2cm}
+  \small \insertframenumber
+  \vspace{0.2cm}
+  \doclicenseIcon
+  \hfill
+  \includegraphics[height=0.6cm]{graphics/kitlogo-eps-converted-to.pdf}
+  \hspace{0.2cm}
+}
+
+\setbeamercovered{transparent}
+
+\setbeamertemplate{footline}[
+ myframe number]
 
 % PACKAGES
 \usepackage[absolute,overlay]{textpos}
-\usepackage{booktabs}
 \usepackage[utf8]{inputenc}
-\usepackage{parskip}
 \usepackage[official]{eurosym}
+\usepackage{booktabs}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{adjustbox}
+
+\usepackage[
+    type={CC},
+    modifier={by},
+    version={4.0},
+]{doclicense}
 
 % HYPERREFERENCES
 \usepackage{hyperref}
@@ -29,7 +55,7 @@
 % SOURCES
 \setbeamercolor{framesource}{fg=gray}
 \setbeamerfont{framesource}{size=\tiny}
-\newcommand{\source}[1]{\begin{textblock*}{5cm}(10.5cm,8.35cm)
+\newcommand{\source}[1]{\begin{textblock*}{5cm}(8.6cm,8.25cm)
     \begin{beamercolorbox}[ht=0.5cm,right]{framesource}
         \usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Source: {#1}
     \end{beamercolorbox}
@@ -41,6 +67,17 @@
 \newcommand{\rd}[1]{\textcolor{kit-red100}{#1}}
 \newcommand{\yl}[1]{\textcolor{kit-yellow100}{#1}}
 \newcommand{\org}[1]{\textcolor{kit-orange100}{#1}}
+
+\usepackage{array}% http://ctan.org/pkg/array
+\makeatletter
+\g@addto@macro{\endtabular}{\rowfont{}}% Clear row font
+\makeatother
+\newcommand{\rowfonttype}{}% Current row font
+\newcommand{\rowfont}[1]{% Set current row font
+   \gdef\rowfonttype{#1}#1%
+}
+\newcolumntype{L}{>{\rowfonttype}l}
+\newcolumntype{R}{>{\rowfonttype}r}
 
 % FONT
 %\usepackage{utopia}
@@ -76,7 +113,11 @@
 
 \begin{document}
 
-\maketitle
+{
+  \setbeamertemplate{footline}{} 
+  \maketitle
+}
+\addtocounter{framenumber}{-1}
 
 \begin{frame}
   \frametitle{Outline}
